@@ -20,6 +20,13 @@ class LoginController extends Controller
 
     use AuthenticatesUsers;
 
+    // overriding the auth trait to use id 
+
+    public function username()
+    {
+        return 'idnumber';
+    }
+
     /**
      * Where to redirect users after login.
      *

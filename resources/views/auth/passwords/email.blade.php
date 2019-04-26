@@ -1,7 +1,43 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+@if (session('status'))
+    <div class="notification is-success" role="alert">
+        {{ session('status') }}
+    </div>
+                    @endif
+<div class="columns">
+    <div class="column is-one-third is-offset-one-third m-t-100">
+        <div class="card">
+            <!-- start of card content -->
+    
+            <div class="card-content">
+                <h1 class="title">Forgot Password</h1>
+                <form action="{{route('password.email')}}" method="post" role="form">
+                @csrf
+            
+                <div class="field">
+                    <label for="" class="label">Email Address</label>
+                    <p class="control">
+                        <input class="input{{ $errors->has('idnumber') ? ' is-danger' : '' }}"  type="email" name="idnumber" id="email" placeholder="name@domain.ext" value="{{ old('email') }}">
+
+                    </p>
+                    @if($errors->has('email'))
+                   <p class="help is-danger">{{$errors->first('email')}}</p>
+                    @endif
+                   
+                </div>
+                    <button type="submit" class=" button is-primary is-outlined is-fullwidth m-t-30">Reset Password</button>
+                
+                </form>
+                
+                
+            </div><!-- end of card content -->
+            <h5 class="has-text-centered"><a href="{{route('login')}}" class="is-muted">Remember your Password?</a></h5>
+        </div>
+    </div>
+</div>
+<!-- <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -43,5 +79,5 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 @endsection

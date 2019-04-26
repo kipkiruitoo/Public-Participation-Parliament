@@ -6,16 +6,37 @@
 
 require('./bootstrap');
 
+require('./manage');
+
 window.Vue = require('vue');
 
-import Buefy from 'buefy';
+import Buefy from '../../node_modules/buefy/src/index';
 
 Vue.use(Buefy);
 
 var app = new Vue({
     el: '#app',
-    data: {}
-})
+
+    data: {
+        auto_password: true,
+        password_options: 'keep',
+        permissionsSelected: [],
+        rolesSelected: [],
+        resource: '',
+        crudSelected: ['create', 'read', 'update', 'delete']
+    },
+    methods: {
+        crudName: function (item) {
+            return item.substr(0, 1).toUpperCase() + item.substr(1) + " " + app.resource.substr(0, 1).toUpperCase() + app.resource.substr(1);
+        },
+        crudSlug: function (item) {
+            return item.toLowerCase() + "-" + app.resource.toLowerCase();
+        },
+        crudDescription: function (item) {
+            return "Allow a User to " + item.toUpperCase() + " a " + app.resource.substr(0, 1).toUpperCase() + app.resource.substr(1);
+        }
+    }
+});
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -40,8 +61,3 @@ var app = new Vue({
 // });
 
 // open the nav dropdown
-$(document).ready(function(){
-    $('button.dropdown').hover(function(e){
-        $(this).toggleClass('is-open');
-    });
-});

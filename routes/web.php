@@ -1,4 +1,5 @@
 <?php
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,5 +17,13 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+
+Route::prefix('manage')->middleware('role:superadministrator|administrator')->group(function (){
+    Route::get('/', 'ManageController@index');
+    Route::resource('/permissions', 'PermissionController', ['except' => 'destroy']);
+    Route::resource('/roles', 'RoleController', ['except' => 'destroy']);
+    Route::get('/dashboard', 'ManageController@dashboard')->name('manage.dashboard');
+    Route::resource('/users', 'Usercontroller');
+});
 
 Route::get('/home', 'HomeController@index')->name('home');

@@ -20,44 +20,10 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
+    @include('_includes.nav.main')
+
     <div id="app">
-        <nav class="nav has-shadow">
-            <div class="container">
-                <div class="nav-left">
-                    <a class="nav-item">
-                        <img src="{{asset('images/arms.png')}}" height="150" width="150" alt="logo" href="{{route('home')}}">
-                         <b class="p-l-5">Parliament of Kenya </b>
-                    </a>
-                    <a href="#" class="nav-item is-tab ishidden-mobile m-l-10">Learn</a>
-                    <a href="#" class="nav-item is-tab ishidden-mobile">Participate</a>
-                    <a href="#" class="nav-item is-tab ishidden-mobile">Discuss</a>
-                </div>
-                <div class="nav-right" style="overflow: visible;">
-                    @if (!Auth::guest())
-
-                    <a href="#" class="nav-item is-tab">Login</a>
-                    <a href="#" class="nav-item is-tab">Sign Up</a>
-
-                    @else
-                    <button class="dropdown is-aligned-right nav-item  is-tab">
-                        Hey Davis <span class="icon"><i class="fa fa-caret-down"></i></span>
-
-                        <ul class="dropdown-menu">
-                            <li><a href="#">
-                            <span class="icon"><i class="fa fa-fw fa-user-circle-o"></i></span>    
-                            Profile</a></li>
-                            <li><a href="##"><span class="icon"><i class="fa fa-fw fa-bell"></i></span> Notification</a></li>
-                            <li><a href="#">
-                            <span class="icon"><i class="fa fa-fw fa-cog"></i></span> Settings</a></li>
-                            <li class="seperator"></li>
-                            <li><a href="#"><span class="icon"><i class="fa fa-fw fa-sign-out"></i></span> Logout</a></li>
-                        </ul>
-                    </button>
-                    @endif
-                </div>
-
-            </div>
-        </nav>
+        
             @yield('content')
     </div>
 </body>
