@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Auth;
 use App\Permission;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -16,7 +16,7 @@ class PermissionController extends Controller
     public function index()
     {
         $permissions = Permission::orderBy('id', 'asc')->paginate(10);
-        return view('manage.permissions.index')->withPermissions($permissions);
+        return view('manage.permissions.index',  array('user' => Auth::user()))->withPermissions($permissions);
     }
 
     /**
@@ -26,7 +26,7 @@ class PermissionController extends Controller
      */
     public function create()
     {
-        return view('manage.permissions.create');
+        return view('manage.permissions.create',  array('user' => Auth::user()));
     }
 
     /**
@@ -70,7 +70,7 @@ class PermissionController extends Controller
               return redirect()->route('permissions.index');
             }
           } else {
-            return redirect()->route('permissions.create')->withInput();
+            return redirect()->route('permissions.create',  array('user' => Auth::user()))->withInput();
           }
 
     }
@@ -85,7 +85,7 @@ class PermissionController extends Controller
     {
         //
         $permission = Permission::findOrFail($permission->id);
-      return view('manage.permissions.show')->withPermission($permission);
+      return view('manage.permissions.show',  array('user' => Auth::user()))->withPermission($permission);
     }
 
     /**
@@ -98,7 +98,7 @@ class PermissionController extends Controller
     {
         //
         $permission = Permission::findOrFail($permission->id);
-      return view('manage.permissions.edit')->withPermission($permission);
+      return view('manage.permissions.edit',  array('user' => Auth::user()))->withPermission($permission);
     }
 
     /**

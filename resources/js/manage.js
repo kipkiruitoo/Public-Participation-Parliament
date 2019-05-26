@@ -33,3 +33,22 @@ for (let i = 0; i < accordions.length; i++) {
     }
 
 }
+
+
+$("#show").click(function () {
+    $(".modal").addClass("is-active");
+    console.log('i was clicked')
+});
+
+$(".modal-close").click(function () {
+    $(".modal").removeClass("is-active");
+});
+
+navLinks = document.querySelector('.navNarrow');
+narrowLinks = document.querySelector('.narrowLinks');
+
+navLinks.addEventListener('click', toggle);
+
+function toggle() {
+    narrowLinks.classList.toggle('hidden');
+};

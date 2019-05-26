@@ -11,15 +11,10 @@
       Content
     </p>
     <ul class="menu-list">
-      <li><a href="#">Motions</a></li>
-      {{-- <li>
-              <a class="has-submenu {{Nav::hasSegment(['roles', 'permissions'], 2)}}">Roles &amp; Permissions</a>
-      <ul class="submenu">
-        <li><a href="{{route('roles.index')}}" class="{{Nav::isResource('roles')}}">Roles</a></li>
-        <li><a href="{{route('permissions.index')}}" class="{{Nav::isResource('permissions')}}">Permissions</a></li>
-      </ul>
-      </li> --}}
-    </ul>
+      <li><a href="{{route('bill.index')}}" class="{{Nav::isResource('bill')}} is-primary">Bills</a></li>
+      <li><a href="{{route('petitions.index')}}" class="{{Nav::isResource('petitions')}} is-primary">Petitions</a></li>
+      <li><a href="">Memoranda</a></li>
+      
 
     <p class="menu-label">
       Administration

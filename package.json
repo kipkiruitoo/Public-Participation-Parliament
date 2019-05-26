@@ -25,6 +25,7 @@
     },
     "dependencies": {
         "buefy": "^0.7.5",
-        "font-awesome": "^4.7.0"
+        "font-awesome": "^4.7.0",
+        "slug": "^1.1.0"
     }
 }

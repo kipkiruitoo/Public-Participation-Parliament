@@ -9,10 +9,14 @@ require('./bootstrap');
 require('./manage');
 
 window.Vue = require('vue');
+window.Slug = require('slug');
+Slug.defaults.mode = 'rfc3986';
 
 import Buefy from '../../node_modules/buefy/src/index';
 
 Vue.use(Buefy);
+
+Vue.component('slugWidget', require('./components/slugWidget.vue').default);
 
 var app = new Vue({
     el: '#app',
@@ -23,9 +27,17 @@ var app = new Vue({
         permissionsSelected: [],
         rolesSelected: [],
         resource: '',
+        title: '',
+        slug: '',
+
         crudSelected: ['create', 'read', 'update', 'delete']
     },
     methods: {
+        updateSlug: {
+            updateSlug: function (val) {
+                this.slug = val;
+            }
+        },
         crudName: function (item) {
             return item.substr(0, 1).toUpperCase() + item.substr(1) + " " + app.resource.substr(0, 1).toUpperCase() + app.resource.substr(1);
         },

@@ -1,0 +1,40 @@
+<?php
+
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class CreatePetitionsTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('petitions', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->bigInteger('bill_id');
+            $table->bigInteger('user_id');
+            $table->string('subject');
+            $table->string('description');
+            $table->timestamps();
+            $table->string('file')->nullable();
+
+
+            $table->foreign('bill_id')->references('id')->on('bills')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('petitions');
+    }
+}

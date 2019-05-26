@@ -1,8 +1,6 @@
-// text override
-#app {
-    background-color: #D6EAF8;
-    height: 100vh;
-}
+/* ========================================
+   ============ Text Overrides ===========
+   ======================================== */
 
 .is-muted {
     color: $grey-light !important;
@@ -12,15 +10,35 @@ a.is-muted:hover {
     color: $grey !important;
 }
 
-
-
+.nav-item img {
+    max-height: 2.8rem;
+}
 
 .nav {
     height: 4.5rem;
-
 }
 
-.nav-item img {
-    height: 33px;
-    width: 33px;
+nav .navWide {
+    display: none;
+    margin: 0 auto;
+}
+
+.navbar-brand .brand-item {
+    margin-right: 5px;
+    margin-left: 10px;
+
+    @include desktop {
+        margin-right: 15px;
+    }
+}
+
+@media (min-width: 480px) {
+
+    nav .navWide {
+        display: block;
+    }
+
+    nav .navNarrow {
+        display: none;
+    }
 }

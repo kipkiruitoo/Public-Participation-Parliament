@@ -23,26 +23,33 @@
     
         <div class="navbar-menu">
             <div class="navbar-start">
-                <a href="#" class="navbar-item is-tab ishidden-mobile m-l-10">Learn</a>
-                <a href="#" class="navbar-item is-tab ishidden-mobile">Participate</a>
-                <a href="#" class="navbar-item is-tab ishidden-mobile">Discuss</a>
+                <a href="{{url('/')}}" class="navbar-item  is-tab ishidden-mobile m-l-10">Learn</a>
+                <a href="{{url('/participate')}}" class="navbar-item is-tab ishidden-mobile">Participate</a>
+                <a href="{{url('/discuss')}}" class="navbar-item is-tab ishidden-mobile">Discuss</a>
             </div>
             <div class="navbar-end nav-menu" style="overflow: visible">
                 @guest
 
-                <a href="{{route('login')}}" class="nav-item is-tab">Login</a>
-                <a href="{{route('register')}}" class="nav-item is-tab">Sign Up</a>
+                <a href="{{route('login')}}" class="navbar-item is-tab">Login</a>
+                <a href="{{route('register')}}" class="navbar-item m-l-10 is-tab">Register</a>
 
                 @else
                 <div class="navbar-item has-dropdown is-hoverable">
-                    <a class="navbar-link">Hey {{Auth::user()->name}}</a>
+                   
+                    <a class="navbar-link"> <img src="/uploads/avatars/{{ $user->avatar }}"
+                        style=" width: 25px; height: 25px;  border-radius:50%; margin-right: 25px;" alt=""> Hey {{Auth::user()->name}}</a>
                     <div class="navbar-dropdown is-right">
-                        <a href="#" class="navbar-item">
+                        <a href="{{url('/profile')}}" class="navbar-item">
                             <span class="icon">
                                 <i class="fa fa-fw fa-user-circle-o m-r-5"></i>
                             </span>Profile
                         </a>
-
+                        <hr class="navbar-divider">
+                        <a href="{{url('/messages')}}" class="navbar-item">
+                                <span class="icon">
+                                    <i class="fa fa-fw fa-envelope m-r-5"></i>
+                                </span>Messages
+                            </a>
                         <a href="#" class="navbar-item">
                             <span class="icon">
                                 <i class="fa fa-fw fa-bell m-r-5"></i>

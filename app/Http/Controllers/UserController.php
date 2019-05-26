@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Role;
 use Illuminate\Http\Request;
+use Image;
+use Auth;
 
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
@@ -150,6 +152,57 @@ class UserController extends Controller
         //     $request->session()->flash('danger', 'Sorry a problem occured while editing the  user. try again later or contact the developer');
         //     return redirect()->route('users.edit', $user->id);
         // }
+    }
+
+    public function profile(){
+        return view('profile', array('user' => Auth::user()));
+    }
+    public function updateprofile(Request $request, User $user){
+        $this->validate($request, [
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . $user->id],
+            // 'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'phone' => ['required', 'numeric', 'min:10', 'unique:users,phone,' . $user->id],
+            'idnumber' => ['required', 'numeric', 'unique:users,idnumber,' . $user->id],
+        ]);
+        $id = $user->id;
+        $user = User::findOrFail($user->id);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->phone = $request->phone;
+        $user->idnumber = $request->idnumber;
+
+        if ($request->password != '') {
+            $user->password = $request->password;
+        } else {
+            // generate password
+            $length = 10;
+            $keyspace = '123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ';
+            $str = '';
+            $max = mb_strlen($keyspace, '8bit') - 1;
+            for ($i = 0; $i < $length; ++$i) {
+                $str .= $keyspace[random_int(0, $max)];
+            }
+            $password = $str;
+        }
+        $user->save();
+
+        return view('profile', array('user' => Auth::user()));
+    }
+    public function updateavatar(Request $request){
+
+        if ($request->hasFile('avatar')) {
+            $avatar = $request->file('avatar');
+            $filename = time() . '.' . $avatar->getClientOriginalExtension();
+
+            Image::make($avatar)->resize(300,300)->save(public_path('/uploads/avatars/' . $filename));
+
+            $user = Auth::user();
+            $user->avatar = $filename;
+            $user->save();
+
+            return view('profile', array('user' => Auth::user()));
+        }
     }
 
     /**

@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Auth;
 use App\Role;
 use App\Permission;
 use Illuminate\Http\Request;
@@ -18,7 +18,7 @@ class RoleController extends Controller
     public function index()
     {
         $roles = Role::all();
-        return view('manage.roles.index')->withRoles($roles);
+        return view('manage.roles.index',  array('user' => Auth::user()))->withRoles($roles);
     }
 
     /**
@@ -30,7 +30,7 @@ class RoleController extends Controller
     {
         //
         $permissions = Permission::all();
-      return view('manage.roles.create')->withPermissions($permissions);
+      return view('manage.roles.create',  array('user' => Auth::user()))->withPermissions($permissions);
     }
 
     /**
@@ -69,7 +69,7 @@ class RoleController extends Controller
     {
         $id = $role->id;
         $role = Role::where('id', $id)->with('permissions')->first();
-        return view('manage.roles.show')->withRole($role);
+        return view('manage.roles.show',  array('user' => Auth::user()))->withRole($role);
     }
 
     /**
@@ -83,7 +83,7 @@ class RoleController extends Controller
         $id = $role->id;
         $role = Role::where('id', $id)->with('permissions')->first();
         $permissions = Permission::all();
-        return view('manage.roles.edit')->withRole($role)->withPermissions($permissions);
+        return view('manage.roles.edit',  array('user' => Auth::user()))->withRole($role)->withPermissions($permissions);
     }
 
     /**
