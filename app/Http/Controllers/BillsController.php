@@ -54,9 +54,23 @@ class BillsController extends Controller
         $bill->description = $request->description;
         $bill->slug = str_slug($request->title);
         $bill->author_id = $request->user()->id;
-        $path = $request->file('bill')->storeAs('bills',str_slug($request->title) );
+        if ($request->hasFile('bill')) {
+
+            $file = $request->file('bill');
+
+            $filename = $bill->slug;
+
+            $extension = $file->getClientOriginalExtension();
+        // FIXME: PLEASE
+        $file->storeAs('public/bills',$filename . '.' .  $extension);
         
-        $bill->file = $path;
+        $bill->file = $filename  . '.' . $extension;
+
+        
+        
+    
+        }
+
 
         // $bill->save();
         if ($bill->save()) {
@@ -119,11 +133,20 @@ class BillsController extends Controller
         $bill->description = $request->description;
         $bill->slug = str_slug($request->title);
         $bill->author_id = $request->user()->id;
-        if ($request->file('bill')) {
+        if ($request->hasFile('bill')) {
+
             $file = $request->file('bill');
-            $path = $request->file('bill')->storeAs('bills',str_slug($request->title));
+
+            $filename = $bill->slug;
+
+            $extension = $file->getClientOriginalExtension();
+        // FIXME: PLEASE
+        $file->storeAs('public/bills',$filename . '.' .  $extension);
         
-            $bill->file = $path;
+        $bill->file = $filename  . '.' . $extension;
+
+        
+        
     
         }
         if ($bill->save()) {
@@ -153,7 +176,7 @@ class BillsController extends Controller
         $path = $bill->file;
         $storagepath = storage_path();
         
-        return Response::make(file_get_contents($storagepath ."\app\\". str_replace('/', '\\', $path)  . '.pdf'), 200, [
+        return Response::make(file_get_contents($storagepath ."\app\public\bills\\". str_replace('/', '\\', $path)), 200, [
 
             'Content-Type'
         => 'application/pdf',
@@ -163,14 +186,14 @@ class BillsController extends Controller
         
         ]);
 
-        // if ( Storage::get($storagepath ."\app\\". str_replace('/', '\\', $path) . '.pdf') ) { 
+        // if ( Storage::get($storagepath ."\app\public\bills\\". str_replace('/', '\\', $path)) ) { 
 
            
          
-            // } else { 
-                // echo $path;
+        //     } else { 
+        //         echo $path;
             
-            // }
+        //     }
 
 // FIXME: PLEASE
     

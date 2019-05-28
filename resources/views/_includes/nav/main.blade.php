@@ -1,4 +1,7 @@
 {{-- new nav bar --}}
+<?php
+$user = Auth::user();
+?>
 <nav class="navbar has-shadow">
     <div class="container">
         <div class="navbar-brand">
@@ -25,7 +28,7 @@
             <div class="navbar-start">
                 <a href="{{url('/')}}" class="navbar-item  is-tab ishidden-mobile m-l-10">Learn</a>
                 <a href="{{url('/participate')}}" class="navbar-item is-tab ishidden-mobile">Participate</a>
-                <a href="{{url('/discuss')}}" class="navbar-item is-tab ishidden-mobile">Discuss</a>
+                <a href="{{url('/forums')}}" class="navbar-item is-tab ishidden-mobile">Discuss</a>
             </div>
             <div class="navbar-end nav-menu" style="overflow: visible">
                 @guest

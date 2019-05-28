@@ -183,6 +183,7 @@ return [
         Intervention\Image\ImageServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
         Cmgmyr\Messenger\MessengerServiceProvider::class,
+        DevDojo\Chatter\ChatterServiceProvider::class,
        
 
     ],
