@@ -1,6 +1,7 @@
 <?php
 use Illuminate\Support\Facades\Route;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'HomeController@learn');
+Route::get('/', 'LearnController@learn');
 Route::get('/participate', 'HomeController@participate');
 Route::get('/discuss', 'HomeController@discuss');
 
