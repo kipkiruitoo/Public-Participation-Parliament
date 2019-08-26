@@ -6,6 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laratrust\Traits\LaratrustUserTrait;
+use Illuminate\Support\Facades\Cache;
 use Cmgmyr\Messenger\Traits\Messagable;
 
 class User extends Authenticatable
@@ -40,4 +41,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function isOnline(){
+
+        return Cache::has('user-is-online-'. $this->id);
+    }
 }

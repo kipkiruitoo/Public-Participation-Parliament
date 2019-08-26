@@ -184,6 +184,7 @@ return [
         Barryvdh\Debugbar\ServiceProvider::class,
         Cmgmyr\Messenger\MessengerServiceProvider::class,
         DevDojo\Chatter\ChatterServiceProvider::class,
+        ConsoleTVs\Charts\ChartsServiceProvider::class,
        
 
     ],
@@ -240,6 +241,7 @@ return [
         'Laratrust'   => Laratrust\LaratrustFacade::class,
         'Nav' => DevMarketer\EasyNav\EasyNavFacade::class,
         'Image' => Intervention\Image\Facades\Image::class,
+        'Charts' => ConsoleTVs\Charts\Facades\Charts::class,
 
     ],
 

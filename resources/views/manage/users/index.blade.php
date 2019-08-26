@@ -13,7 +13,7 @@
     <hr>
     <div class="card">
         <div class="card-content">
-                <table class="table is-narrow">
+                <table class="table is-narrow table ">
                         <thead>
                             <tr>
                                 <th>no</th>
@@ -34,6 +34,17 @@
                                     <td>{{$user->idnumber}}</td>
                                     <td>{{$user->email}}</td>
                                     <td>{{$user->phone}}</td>
+                                    <td>
+                                        @if ($user->isOnline())
+                                            <li class="has-text-success">
+                                                Online
+                                            </li>
+                                        @else
+                                        <li class="has-text-danger">
+                                                Offline
+                                            </li>
+                                        @endif
+                                    </td>
                                     <td>{{$user->created_at->toFormattedDateString()}}</td>
                                     <td class="has-text-right">
                                             <a href="{{route('users.show', $user->id)}}" class="button is-outlined is-primary">View</a>
