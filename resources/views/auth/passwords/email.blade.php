@@ -19,8 +19,7 @@
                 <div class="field">
                     <label for="" class="label">Email Address</label>
                     <p class="control">
-                        <input class="input{{ $errors->has('idnumber') ? ' is-danger' : '' }}"  type="email" name="idnumber" id="email" placeholder="name@domain.ext" value="{{ old('email') }}">
-
+                       <input id="email" type="email" class="input{{ $errors->has('email') ? ' is-danger' : '' }}" name="email" value="{{ old('email') }}" required>
                     </p>
                     @if($errors->has('email'))
                    <p class="help is-danger">{{$errors->first('email')}}</p>
