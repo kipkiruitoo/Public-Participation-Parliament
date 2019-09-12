@@ -103,12 +103,12 @@ class ChatterHelper
      */
     public static function categoriesMenu($categories)
     {
-        $menu = '<ul class="nav nav-pills nav-stacked">';
+        $menu = '<div class="list is-hoverable">';
 
         foreach ($categories as $category) {
-            $menu .= '<li>';
-            $menu .= '<a href="/'.config('chatter.routes.home').'/'.config('chatter.routes.category').'/'.$category['slug'].'">';
-            $menu .= '<div class="chatter-box" style="background-color:'.$category['color'].'"></div>';
+            $menu .= '<li class = "list-item">';
+            $menu .= '<a class="m-t-15" href="/'.config('chatter.routes.home').'/'.config('chatter.routes.category').'/'.$category['slug'].'">';
+            $menu .= '<div class="chatter-box" style="color:'.$category['color'].'">';
             $menu .= $category['name'].'</a>';
 
             if (count($category['parents'])) {
@@ -118,7 +118,7 @@ class ChatterHelper
             $menu .= '</li>';
         }
 
-        $menu .= '</ul>';
+        $menu .= '</div>';
 
         return $menu;
     }

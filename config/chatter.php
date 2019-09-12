@@ -148,7 +148,7 @@ return [
 
     'security' => [
         'limit_time_between_posts' => true, //
-        'time_between_posts'       => 1, // In minutes
+        'time_between_posts'       => 0.5, // In minutes
     ],
 
     /*
@@ -164,7 +164,7 @@ return [
     |
     */
 
-    'editor' => 'simplemde',
+    'editor' => 'tinymce',
 
     /*
     |--------------------------------------------------------------------------
@@ -286,11 +286,11 @@ return [
         'discussion' => [
             'index'   => [],
             'show'    => [],
-            'create'  => [],
-            'store'   => [],
-            'destroy' => [],
-            'edit'    => [],
-            'update'  => [],
+            'create'  => ['role:superadministrator|administrator', ],
+            'store'   => ['role:superadministrator|administrator',],
+            'destroy' => ['role:superadministrator|administrator'],
+            'edit'    => ['role:superadministrator|administrator'],
+            'update'  => ['role:superadministrator|administrator'],
         ],
         'post' => [
             'index'   => [],

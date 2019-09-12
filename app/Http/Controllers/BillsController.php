@@ -49,7 +49,7 @@ class BillsController extends Controller
         $file = $request->file('bill');
         
         $bill = new Bill();
-        $bill->title = $request->title;
+        $bill->name = $request->title;
         $bill->number = $request->number;
         $bill->description = $request->description;
         $bill->slug = str_slug($request->title);

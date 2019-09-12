@@ -8,7 +8,7 @@
         </div>
         <div class="column">
             <a href="{{route('bill.create')}}" class="button is-primary is-pulled-right"><i
-                    class="fa fa-user-plus m-r-10"></i> Create New Post</a>
+                    class="fa fa-user-plus m-r-10"></i>Add new Bill</a>
         </div>
     </div>
     <hr class="m-t-0">
@@ -30,7 +30,7 @@
                     @foreach ($bills as $bill)
                     <tr>
                         <td>{{$bill->number}}</td>
-                        <td>{{$bill->title}}</td>
+                        <td>{{$bill->name}}</td>
                         <td>{{$bill->published_at}}</td>
                         <td><a href="{{route('viewpdf', $bill->id)}}" class="button is-warning">View Pdf</a></td>
                         <td>

@@ -27,7 +27,8 @@ class HomeController extends Controller
     }
     public function index()
     {
-        return view('home',  array('user' => Auth::user()));
+        // return view('discuss',  array('user' => Auth::user()));
+        return redirect("forums");
     }
     public function participate(){
 
@@ -35,6 +36,6 @@ class HomeController extends Controller
     }
     public function discuss(){
 
-        return view('discuss',  array('user' => Auth::user()));
+        return redirect("forums");
     }
 }

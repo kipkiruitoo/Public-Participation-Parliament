@@ -18,7 +18,7 @@
             <div class="field">
                 <label for="" class="label">Title</label>
                 <p class="control">
-                    <pre>{{$bill->title}}</pre>
+                    <pre>{{$bill->name}}</pre>
                 </p>
             </div>
             <div class="field">

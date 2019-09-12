@@ -26,9 +26,7 @@ $user = Auth::user();
     
         <div class="navbar-menu">
             <div class="navbar-start">
-                <a href="{{url('/')}}" class="navbar-item  is-tab ishidden-mobile m-l-10">Learn</a>
-                <a href="{{url('/participate')}}" class="navbar-item is-tab ishidden-mobile">Participate</a>
-                <a href="{{url('/forums')}}" class="navbar-item is-tab ishidden-mobile">Discuss</a>
+                
             </div>
             <div class="navbar-end nav-menu" style="overflow: visible">
                 @guest
@@ -58,11 +56,13 @@ $user = Auth::user();
                                 <i class="fa fa-fw fa-bell m-r-5"></i>
                             </span>Notifications
                         </a>
+                        @role('administrator')
                         <a href="{{route('manage.dashboard')}}" class="navbar-item">
                             <span class="icon">
                                 <i class="fa fa-fw fa-cog m-r-5"></i>
                             </span>Manage
                         </a>
+                        @endrole
                         <hr class="navbar-divider">
                         <a href="{{ route('logout') }}" class=" navbar-item" onclick="event.preventDefault(); 
                             document.getElementById('logout-form').submit();"><span class="icon"><i

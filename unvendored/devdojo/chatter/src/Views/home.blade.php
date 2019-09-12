@@ -62,20 +62,22 @@
 
     <div class="container chatter_container">
 
-        <div class="row">
+        <div class="columns">
 
-            <div class="col-md-3 left-column">
+            <div class="column is-one-fifth">
                 <!-- SIDEBAR -->
                 <div class="chatter_sidebar">
-                    <button class="btn btn-primary" id="new_discussion_btn"><i class="chatter-new"></i>
+                    @role('administrator|superadministrator')
+                    <button class="btn is-dark" id="new_discussion_btn"><i class="chatter-new"></i>
                         @lang('chatter::messages.discussion.new')</button>
                     <a href="/{{ Config::get('chatter.routes.home') }}"><i class="chatter-bubble"></i>
                         @lang('chatter::messages.discussion.all')</a>
+                    @endrole
                     {!! $categoriesMenu !!}
                 </div>
                 <!-- END SIDEBAR -->
             </div>
-            <div class="col-md-9 right-column">
+            <div class="column is-four-fifths">
                 <div class="panel">
                     <ul class="discussions">
                         @foreach($discussions as $discussion)
@@ -156,42 +158,47 @@
             action="/{{ Config::get('chatter.routes.home') }}/{{ Config::get('chatter.routes.discussion') }}"
             method="POST">
             <div class="columns">
-                <div class="column is-7">
+                <div class="column is-three-quarter">
                     <!-- TITLE -->
-                    <input type="text" class="input m-t-10" id="title" name="title"
+                    <input type="text" class="input m-t-10 m-l-10 p-10" id="title" name="title"
                         placeholder="@lang('chatter::messages.editor.title')" value="{{ old('title') }}">
                 </div>
-
-                <div class="column is-4">
-                    <!-- CATEGORY -->
-                    <select id="chatter_category_id" class="input m-t-10" name="chatter_category_id">
-                        <option value="">@lang('chatter::messages.editor.select')</option>
-                        @foreach($categories as $category)
-                        @if(old('chatter_category_id') == $category->id)
-                        <option value="{{ $category->id }}" selected>{{ $category->name }}</option>
-                        @elseif(!empty($current_category_id) && $current_category_id == $category->id)
-                        <option value="{{ $category->id }}" selected>{{ $category->name }}</option>
-                        @else
-                        <option value="{{ $category->id }}">{{ $category->name }}</option>
-                        @endif
-                        @endforeach
-                    </select>
+                <div class="column is-one-quarters">
+                        <div class="columns">
+                                <div class="column is-three-quarters">
+                                        <!-- CATEGORY -->
+                                        <select id="chatter_category_id" class="input m-t-10 m-l-5" name="chatter_category_id">
+                                            <option value="">@lang('chatter::messages.editor.select')</option>
+                                            @foreach($categories as $category)
+                                            @if(old('chatter_category_id') == $category->id)
+                                            <option value="{{ $category->id }}" selected>{{ $category->name }}</option>
+                                            @elseif(!empty($current_category_id) && $current_category_id == $category->id)
+                                            <option value="{{ $category->id }}" selected>{{ $category->name }}</option>
+                                            @else
+                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                            @endif
+                                            @endforeach
+                                        </select>
+                                    </div>
+                    
+                                    <div class="column is-one-quarter" style="float:right;">
+                                        <i class="chatter-close"></i>
+                                    </div>
+                        </div>
                 </div>
-
-                <div class="column is-1">
-                    <i class="chatter-close"></i>
-                </div>
+               
+             
             </div><!-- .row -->
             <div class="columns">
                 <div class="column">
                     <div id="editor">
                         @if( $chatter_editor == 'tinymce' || empty($chatter_editor) )
-                        <label id="tinymce_placeholder">@lang('chatter::messages.editor.tinymce_placeholder')</label>
-                        <textarea id="body" class="richText" name="body" placeholder="">{{ old('body') }}</textarea>
+                        <label id="tinymce_placeholder" class="m-t-50">@lang('chatter::messages.editor.tinymce_placeholder')</label>
+                        <textarea id="body" class="richText m-t-20" name="body" >{{ old('body')}}</textarea>
                         @elseif($chatter_editor == 'simplemde')
-                        <textarea id="simplemde" name="body" placeholder="">{{ old('body') }}</textarea>
+                        <textarea id="simplemde" name="body" class=" m-t-20" placeholder="">{{ old('body') }}</textarea>
                         @elseif($chatter_editor == 'trumbowyg')
-                        <textarea class="trumbowyg" name="body"
+                        <textarea class="trumbowyg  m-t-20" name="body"
                             placeholder="@lang('chatter::messages.editor.tinymce_placeholder')">{{ old('body') }}</textarea>
                         @endif
                     </div>
@@ -204,13 +211,22 @@
             <input type="hidden" name="_token" id="csrf_token_field" value="{{ csrf_token() }}">
 
             <div id="new_discussion_footer">
-                <input type='text' id="color" name="color" /><span
-                    class="select_color_text">@lang('chatter::messages.editor.select_color_text')</span>
-                <button id="submit_discussion" class="btn btn-success pull-right"><i class="chatter-new"></i>
+                <div class="columns">
+                    <div class="column">
+                      <input type='color' class="input"  id="color" name="color" /><span
+                    class="help">@lang('chatter::messages.editor.select_color_text')</span>   
+                    </div>
+                    <div class="column m-t-15">
+                        <button id="submit_discussion" class="btn btn-success pull-right"><i class="chatter-new"></i>
                     @lang('chatter::messages.discussion.create')</button>
-                <a href="/{{ Config::get('chatter.routes.home') }}" class="btn btn-default pull-right"
+                    <a href="/{{ Config::get('chatter.routes.home') }}" class="btn btn-default pull-right"
                     id="cancel_discussion">@lang('chatter::messages.words.cancel')</a>
                 <div style="clear:both"></div>
+                    </div>
+                </div>
+               
+                
+              
             </div>
         </form>
 

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
-    protected $table = 'chatter_categories';
+    protected $table = 'bills';
     public $timestamps = true;
     public $with = 'parents';
 

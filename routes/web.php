@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'LearnController@learn');
+Route::get('/', 'HomeController@discuss');
 Route::get('/participate', 'HomeController@participate');
 Route::get('/discuss', 'HomeController@discuss');
 
