@@ -8,11 +8,13 @@
         </div>
         <div class="column">
             <a href="{{route('bill.create')}}" class="button is-primary is-pulled-right"><i
-                    class="fa fa-user-plus m-r-10"></i>Add new Bill</a>
+                    class="fa fa-legal  m-r-10"></i>Add new Bill</a>
         </div>
     </div>
     <hr class="m-t-0">
-    <div class="card">
+    <div class="columns">
+        <div class="column">
+             <div class="card">
         <div class="card-content">
             <table class="table ">
                 <thead>
@@ -49,6 +51,9 @@
             </table>
         </div>
     </div>
+        </div>
+    </div>
+   
     @endsection
     @push('scripts')
     <script src="">

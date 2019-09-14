@@ -56,7 +56,7 @@ $user = Auth::user();
                                 <i class="fa fa-fw fa-bell m-r-5"></i>
                             </span>Notifications
                         </a>
-                        @role('administrator')
+                        @role('administrator|superadministrator')
                         <a href="{{route('manage.dashboard')}}" class="navbar-item">
                             <span class="icon">
                                 <i class="fa fa-fw fa-cog m-r-5"></i>

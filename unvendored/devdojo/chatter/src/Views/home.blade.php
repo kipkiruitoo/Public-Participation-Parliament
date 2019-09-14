@@ -110,7 +110,7 @@
 
                                 <div class="chatter_middle">
                                     <h3 class="chatter_middle_title">{{ $discussion->title }} <div class="chatter_cat"
-                                            style="background-color:{{ $discussion->category->color }}">
+                                            style="background-color:{{ $discussion->color }}">
                                             {{ $discussion->category->name }}</div>
                                     </h3>
                                     <span class="chatter_middle_details">@lang('chatter::messages.discussion.posted_by')

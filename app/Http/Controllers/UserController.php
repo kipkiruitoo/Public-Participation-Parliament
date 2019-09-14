@@ -164,8 +164,9 @@ class UserController extends Controller
             // 'password' => ['required', 'string', 'min:8', 'confirmed'],
             'phone' => ['required', 'numeric', 'min:10', 'unique:users,phone,' . $user->id],
             'idnumber' => ['required', 'numeric', 'unique:users,idnumber,' . $user->id],
-        ]);
+        ]); 
         $id = $user->id;
+        echo
         $user = User::findOrFail($user->id);
         $user->name = $request->name;
         $user->email = $request->email;

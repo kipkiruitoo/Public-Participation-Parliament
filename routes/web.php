@@ -33,9 +33,11 @@ Route::prefix('manage')->middleware('role:superadministrator|administrator')->gr
 Route::get('/profile', 'UserController@profile');
 Route::post('/profile', 'UserController@updateavatar');
 
-Route::put('/updateprofile', 'UserController@updateprofile')->name('updateprofile');
-
+Route::put('/updateprofile/{id}', 'UserController@updateprofile')->name('updateprofile');
+Route::patch('/updateprofile/{id}', 'UserController@updateprofile')->name('updateprofile');
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/sentiment', 'SentimentController@sentiment');
 
 Route::group(['prefix' => 'messages'], function () {
     Route::get('/', ['as' => 'messages', 'uses' => 'MessagesController@index']);

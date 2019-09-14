@@ -17,7 +17,7 @@ class ChatterTableSeeder extends Seeder
         if (!\DB::table('users')->find(1)) {
             \DB::table('users')->insert([
                 0 => [
-                    'id'             => 1,
+                    'id'             => 20,
                     'name'           => 'Tony Lea',
                     'email'          => 'tony@hello.com',
                     'password'       => '$2y$10$9ED4Exe2raEeaeOzk.EW6uMBKn3Ib5Q.7kABWaf4QHagOgYHU8ca.',
@@ -32,9 +32,9 @@ class ChatterTableSeeder extends Seeder
 
         \DB::table('chatter_categories')->delete();
 
-        \DB::table('chatter_categories')->insert([
+        \DB::table('bills')->insert([
             0 => [
-                'id'         => 1,
+                'id'         => 17,
                 'parent_id'  => null,
                 'order'      => 1,
                 'name'       => 'Introductions',
@@ -44,7 +44,7 @@ class ChatterTableSeeder extends Seeder
                 'updated_at' => null,
             ],
             1 => [
-                'id'         => 2,
+                'id'         => 18,
                 'parent_id'  => null,
                 'order'      => 2,
                 'name'       => 'General',
@@ -54,7 +54,7 @@ class ChatterTableSeeder extends Seeder
                 'updated_at' => null,
             ],
             2 => [
-                'id'         => 3,
+                'id'         => 19,
                 'parent_id'  => null,
                 'order'      => 3,
                 'name'       => 'Feedback',
@@ -64,7 +64,7 @@ class ChatterTableSeeder extends Seeder
                 'updated_at' => null,
             ],
             3 => [
-                'id'         => 4,
+                'id'         => 20,
                 'parent_id'  => null,
                 'order'      => 4,
                 'name'       => 'Random',
@@ -74,7 +74,7 @@ class ChatterTableSeeder extends Seeder
                 'updated_at' => null,
             ],
             4 => [
-                'id'         => 5,
+                'id'         => 21,
                 'parent_id'  => 1,
                 'order'      => 1,
                 'name'       => 'Rules',
@@ -84,7 +84,7 @@ class ChatterTableSeeder extends Seeder
                 'updated_at' => null,
             ],
             5 => [
-                'id'         => 6,
+                'id'         => 22,
                 'parent_id'  => 5,
                 'order'      => 1,
                 'name'       => 'Basics',
@@ -94,7 +94,7 @@ class ChatterTableSeeder extends Seeder
                 'updated_at' => null,
             ],
             6 => [
-                'id'         => 7,
+                'id'         =>23,
                 'parent_id'  => 5,
                 'order'      => 2,
                 'name'       => 'Contribution',
@@ -104,7 +104,7 @@ class ChatterTableSeeder extends Seeder
                 'updated_at' => null,
             ],
             7 => [
-                'id'         => 8,
+                'id'         => 24,
                 'parent_id'  => 1,
                 'order'      => 2,
                 'name'       => 'About',

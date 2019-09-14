@@ -50,7 +50,7 @@
                                         <i class="fa fa-upload"></i>
                                     </span>
                                     <span class="file-label">
-                                        Choose a file
+                                        Choose a file **Must be in pdf form
                                     </span>
                                 </span>
                             </label>

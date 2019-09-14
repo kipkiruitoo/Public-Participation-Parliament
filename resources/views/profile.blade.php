@@ -39,14 +39,14 @@
             <hr>
             <h2 class="subtitle">
                 Edit Your profile
-            </h2>
+            </h2>   
         </div>
     </div>
 </section>
 <div class="flex-container">
 
-    <form action="{{route('updateprofile', $user->id)}}" method="POST">
-        {{method_field('PUT')}}
+    <form action="{{route('updateprofile', $user)}}" method="POST">
+        {{method_field('PATCH')}}
         {{csrf_field()}}
         <div class="columns">
 
@@ -58,6 +58,7 @@
                             <p class="control">
                                 <input class="input{{ $errors->has('name') ? ' is-danger' : '' }}" type="text"
                                     name="name" id="name" placeholder="John doe" value="{{$user->name}}">
+                                   
 
                             </p>
                             @if($errors->has('name'))

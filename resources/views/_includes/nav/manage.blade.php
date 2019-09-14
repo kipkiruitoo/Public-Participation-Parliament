@@ -12,8 +12,8 @@
     </p>
     <ul class="menu-list">
       <li><a href="{{route('bill.index')}}" class="{{Nav::isResource('bill')}} is-primary">Bills</a></li>
-      <li><a href="{{route('petitions.index')}}" class="{{Nav::isResource('petitions')}} is-primary">Petitions</a></li>
-      <li><a href="">Memoranda</a></li>
+      <!-- <li><a href="{{route('petitions.index')}}" class="{{Nav::isResource('petitions')}} is-primary">Petitions</a></li>
+      <li><a href="">Memoranda</a></li> -->
       
 
     <p class="menu-label">

@@ -2,12 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use Charts;
+use App\User;
 use App\Bill;
+use Google\Cloud\Core\ServiceBuilder;
+use DevDojo\Chatter\Models\Models;
+
 use Illuminate\Http\Request;
 use Storage;
 use Response;
 use Auth;
-
+ 
 class BillsController extends Controller
 {
     /**
@@ -92,10 +97,84 @@ class BillsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Bill $bill)
-    {
-        $id = $bill->id;
+    {   $id = $bill->id;
+        $discussion = Models::discussion()->where('chatter_category_id', $id)->first();
+
+        
+        // Google cloud instantiations
+        $cloud = new ServiceBuilder([
+            'keyFilePath' => base_path('isproject.json'),
+            'projectId' => 'isproject-252907'
+        ]);
+
+        $language = $cloud->language();
+
+        $sscores = array();
+
+        $magnitudes = array();
+        $comments = Models::post()->where('chatter_discussion_id', $discussion->id)->get();
+
+        // $comments = array_shift($comments);
+
+        foreach ($comments as $comment) {
+        //    echo $comment->body;
+           $annotation = $language->analyzeSentiment(strip_tags($comment->body));
+            $sentiment = $annotation->sentiment();
+
+            array_push($sscores,$sentiment['score']);
+
+            array_push($magnitudes, $sentiment['magnitude']);
+
+        }
+
+        // average score of the sentiments
+        $s = array_filter($sscores);
+        $avscore = array_sum($s)/count($s);
+
+        $scomment = "Loading Comment";
+
+        if ($avscore >= 0.5  ) {
+            $scomment = "Mostly Positive";
+        }elseif (0.1<= $avscore && $avscore < 0.5) {
+            $scomment = "Somehow Positive";
+        }
+        else if ($avscore < 0 ) {
+            $scomment = "Negative";
+        }elseif (-0.1 <= $avscore && $avscore <= 0.1) {
+            $scomment = "Mostly Neutral";
+        }else{
+            $scomment = "Mixed";
+        }
+
+        // average score of the magnitude
+
+        $m = array_filter($magnitudes);
+        $avmagnitudes = array_sum($m)/ count($m);
+
+        $mcomment ="Emotion of the Text";
+
+        if ($avmagnitudes == 0.0  ) {
+            $mcomment = "Neutral";
+        }else if ($avmagnitudes > 4 ) {
+            $mcomment = "Strong Emotion";
+        }elseif ($avmagnitudes < 2.5) {
+            $mcomment = "Weak Emotion";
+        }
+
+        $sentchart = Charts::multi('line', 'highcharts')
+        ->title('Sentiment Scores Against Magnitude Scores')
+    ->labels(["Scores",])
+    ->elementLabel('points')
+    ->dataset('Sentiment Scores', $s)
+    ->dataset('Magnitude Scores', $m)
+    ->dimensions(600,500)
+   
+    ->responsive(true);
+        
         $bill = Bill::findOrFail($id)->first();
-        return view('manage.bills.show',  array('user' => Auth::user()))->withBill($bill);
+        
+        
+        return view('manage.bills.show', compact('comments', 'mcomment','scomment', 'avscore', 'avmagnitudes', 'sentchart') , array('user' => Auth::user()))->withBill($bill);
     }
 
     /**
@@ -128,7 +207,7 @@ class BillsController extends Controller
         ]);
         $id = $bill->id;
         $bill = Bill::findOrFail($id);
-        $bill->title = $request->title;
+        $bill->name = $request->title;
         $bill->number = $request->number;
         $bill->description = $request->description;
         $bill->slug = str_slug($request->title);

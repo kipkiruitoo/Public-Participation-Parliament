@@ -24,7 +24,7 @@
                         <div class="field">
                             <label for="title">Title</label>
                             <p class="control">
-                                <input type="text" name="title" class="input" id="title" value="{{$bill->title}}"
+                                <input type="text" name="title" class="input" id="title" value="{{$bill->name}}"
                                     required>
                             </p>
                         </div>

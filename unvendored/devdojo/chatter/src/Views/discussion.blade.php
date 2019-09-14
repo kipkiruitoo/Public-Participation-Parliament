@@ -54,7 +54,11 @@
 			</div>
 		@endif
 	@endif
+<div class="m-t-20 m-l-20 " >
+<a href="{{route('viewpdf', $discussion->chatter_category_id)}}" class="button has-text-white "  style="background-color:{{ $discussion->color }}">Read Pdf Version of  Bill</a>		
+</div>
 
+<hr>
 	<div class="container margin-top">
 
 	    <div class="row">

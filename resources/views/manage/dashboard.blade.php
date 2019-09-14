@@ -5,8 +5,11 @@
     <section class="hero is-primary m-b-30 p-l-30 p-b-30">
         <div class="hero-content">
             <div class="columns">
-                <div class="column">
-                    p
+                <div class="column m-t-20">
+                  <h2>Number of Users:</h2> <span></span> 
+                </div>
+                <div class="column m-t-20">
+                  <h2>Number of contributions</h2> <span></span> 
                 </div>
             </div>
         </div>
@@ -33,19 +36,11 @@
             </div>
         </div>
     </div>
-    {{-- <div class="columns">
-        <div class="column is-6">
-            <div class="card">
-                <div class="card-content">
-                    {!! $petitionschart->html() !!}
-                </div>
-            </div>
-        </div>
-    </div> --}}
+   
 </div>
     
 {!! Charts::scripts() !!}
 {!! $userschart->script() !!}
 {!! $billschart->script( ) !!}
-{{-- {!! $petitionschart->script() !!} --}}
+
 @endsection
