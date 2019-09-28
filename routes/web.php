@@ -27,9 +27,9 @@ Route::prefix('manage')->middleware('role:superadministrator|administrator')->gr
     Route::resource('/users', 'Usercontroller');
     Route::resource('/bill', 'BillsController');
     Route::resource('/petitions', 'PetitionController');
-    Route::get('/bill/view/{bill}', 'BillsController@viewpdf')->name('viewpdf');
+    
 });
-
+Route::get('/bill/view/{bill}', 'BillsController@viewpdf')->name('viewpdf');
 Route::get('/profile', 'UserController@profile');
 Route::post('/profile', 'UserController@updateavatar');
 

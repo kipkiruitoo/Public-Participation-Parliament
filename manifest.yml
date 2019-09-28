@@ -1,0 +1,6 @@
+---
+applications:
+  - name: parl
+    random-route: true
+    buildback: php-buildpack
+    memory: 512M
