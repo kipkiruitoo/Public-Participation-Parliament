@@ -142,6 +142,7 @@ class ChatterPostController extends Controller
 
     private function sendEmailNotifications($discussion)
     {
+       
         $users = $discussion->users->except(Auth::user()->id);
         foreach ($users as $user) {
             Mail::to($user)->queue(new ChatterDiscussionUpdated($discussion));

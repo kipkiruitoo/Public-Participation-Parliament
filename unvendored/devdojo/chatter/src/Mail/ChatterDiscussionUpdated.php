@@ -30,7 +30,8 @@ class ChatterDiscussionUpdated extends Mailable
      */
     public function build()
     {
-        return $this->view(config('chatter.email.view'))
+         $subject = "Discussion Updated";
+        return $this->view(config('chatter.email.view'))->subject($subject)
                     ->with([
                         'discussion' => $this->discussion,
                     ]);

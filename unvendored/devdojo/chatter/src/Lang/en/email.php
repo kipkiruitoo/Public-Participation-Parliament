@@ -1,9 +1,9 @@
 <?php
 
 return [
-    'preheader'       => 'Just wanted to let you know that someone has responded to a forum post.',
+    'preheader'       => 'Just wanted to let you know that someone has responded to your discussion post.',
     'greeting'        => 'Hi there,',
-    'body'            => 'Just wanted to let you know that someone has responded to a forum post at',
+    'body'            => 'Just wanted to let you know that someone has responded to your discussion  post at',
     'view_discussion' => 'View the '.mb_strtolower(trans('chatter::intro.titles.discussion')).'.',
     'farewell'        => 'Have a great day!',
     'unsuscribe'      => [

@@ -165,7 +165,7 @@
 		        				@endif
 
 		        			@else
-		        				<span class="chatter_avatar_circle" style="background-color:#<?= \DevDojo\Chatter\Helpers\ChatterHelper::stringToColorCode(Auth::user()->{Config::get('chatter.user.database_field_with_user_name')}) ?>">
+		        				<span class="chatter_avatar_circle" style="background-color:<?= \DevDojo\Chatter\Helpers\ChatterHelper::stringToColorCode(Auth::user()->{Config::get('chatter.user.database_field_with_user_name')}) ?>">
 		        					{{ strtoupper(substr(Auth::user()->{Config::get('chatter.user.database_field_with_user_name')}, 0, 1)) }}
 		        				</span>
 		        			@endif
@@ -181,7 +181,7 @@
 				            <form id="chatter_form_editor" action="/{{ Config::get('chatter.routes.home') }}/posts" method="POST">
 
 						        <!-- BODY -->
-						    	<div id="editor">
+						    	<div id="editor" style="border:solid {{ $discussion->color }} ; border-radius: 0.5%;">
 									@if( $chatter_editor == 'tinymce' || empty($chatter_editor) )
 										<label id="tinymce_placeholder">@lang('chatter::messages.editor.tinymce_placeholder')</label>
 					    				<textarea id="body" class="richText" name="body" placeholder="">{{ old('body') }}</textarea>

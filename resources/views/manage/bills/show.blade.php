@@ -82,7 +82,7 @@
    <ul class="list is-hoverable">
 
   
-    @foreach ($comments as $comment)
+    @foreach ($sanitized as $comment)
      <li class="list-item m-t-10 p-20">
    
 

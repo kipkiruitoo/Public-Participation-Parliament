@@ -114,11 +114,18 @@ class BillsController extends Controller
         $magnitudes = array();
         $comments = Models::post()->where('chatter_discussion_id', $discussion->id)->get();
 
-        // $comments = array_shift($comments);
+//         $comments = array_map(function($comments){
+// //     return (array) $object;
+// // }, $comments);
+
+        $sanitized = [];
 
         foreach ($comments as $comment) {
+
+            array_push($sanitized, $comment);
+            
         //    echo $comment->body;
-           $annotation = $language->analyzeSentiment(strip_tags($comment->body));
+            $annotation = $language->analyzeSentiment(strip_tags($comment->body));
             $sentiment = $annotation->sentiment();
 
             array_push($sscores,$sentiment['score']);
@@ -128,10 +135,16 @@ class BillsController extends Controller
         }
 
         // average score of the sentiments
+        array_shift($sscores);
+        array_shift($magnitudes);
+        
         $s = array_filter($sscores);
         $avscore = array_sum($s)/count($s);
 
         $scomment = "Loading Comment";
+
+        array_shift($sanitized);
+        
 
         if ($avscore >= 0.5  ) {
             $scomment = "Mostly Positive";
@@ -174,7 +187,7 @@ class BillsController extends Controller
         $bill = Bill::findOrFail($id)->first();
         
         
-        return view('manage.bills.show', compact('comments', 'mcomment','scomment', 'avscore', 'avmagnitudes', 'sentchart') , array('user' => Auth::user()))->withBill($bill);
+        return view('manage.bills.show', compact('sanitized', 'mcomment','scomment', 'avscore', 'avmagnitudes', 'sentchart') , array('user' => Auth::user()))->withBill($bill);
     }
 
     /**
