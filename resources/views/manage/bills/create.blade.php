@@ -13,7 +13,7 @@
         <div class="column is-three-quarters">
             <div class="card">
                 <!-- start of card content -->
-
+ 
                 <div class="card-content">
 
                     <form action="{{route('bill.store')}}" method="post" role="form" enctype="multipart/form-data">
@@ -41,7 +41,9 @@
                                     placeholder="A brief description of the bill" rows="10"></textarea>
                             </p>
                         </div>
-
+                        <div class="field">
+                        
+                        </div>
                         <div class="file">
                             <label class=" file-label">
                                 <input type="file" required class="file-input" name="bill">
@@ -55,6 +57,7 @@
                                 </span>
                             </label>
                         </div>
+                        
                         <button type="submit"
                             class=" button is-success  is-fullwidth m-t-20 m-l-5 m-r-5 m-b-10">Create</button>
 

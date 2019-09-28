@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Charts;
 use App\User;
 use App\Bill;
+use App\Clause;
 use Google\Cloud\Core\ServiceBuilder;
 use DevDojo\Chatter\Models\Models;
 
@@ -137,7 +138,7 @@ class BillsController extends Controller
         // average score of the sentiments
         array_shift($sscores);
         array_shift($magnitudes);
-        
+
         $s = array_filter($sscores);
         $avscore = array_sum($s)/count($s);
 
@@ -199,8 +200,9 @@ class BillsController extends Controller
     public function edit(Bill $bill)
     {
         $bill = Bill::where('id', $bill->id)->first();
+        $sections = Clause::where('bill', $bill->id)->paginate(12);
 
-        return view('manage.bills.edit',  array('user' => Auth::user()))->withBill($bill);
+        return view('manage.bills.edit',  array('user' => Auth::user()), compact('sections'))->withBill($bill);
 
     }
 
