@@ -94,8 +94,7 @@
                                     (substr($discussion->user->{$db_field}, 0, 8) == 'https://') )
                                     <img src="{{ $discussion->user->{$db_field}  }}">
                                     @else
-                                    <img
-                                        src="{{ Config::get('chatter.user.relative_url_to_image_assets') . $discussion->user->{$db_field}  }}">
+                                    <!-- <img src="{{ $discussion->user->{$db_field}  }}"> -->
                                     @endif
 
                                     @else

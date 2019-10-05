@@ -3,6 +3,7 @@
 namespace DevDojo\Chatter\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Bill;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Discussion extends Model
@@ -45,4 +46,5 @@ class Discussion extends Model
     {
         return $this->belongsToMany(config('chatter.user.namespace'), 'chatter_user_discussion', 'discussion_id', 'user_id');
     }
+   
 }

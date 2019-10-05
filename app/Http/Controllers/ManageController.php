@@ -20,23 +20,46 @@ class ManageController extends Controller
         $billsdata = Bill::all();
         $users = User::where(DB::raw("(DATE_FORMAT(created_at,'%Y'))"),date('Y'))->get();
         $bills = Bill::where(DB::raw("(DATE_FORMAT(created_at,'%Y'))"),date('Y'))->get();
+
+        $labels = Bill::all()->pluck('name');
+        // print_r($labels->toArray());
+        $ncomments = Models::post()->count();
+        $comms = Models::post()->where(DB::raw("(DATE_FORMAT(created_at,'%Y'))"), date('Y'))->get();
+        $nusers = User::count();
         // $petitions = Petitions::where(DB::raw("(DATE_FORMAT(created_at,'%Y'))"),date('Y'))->get();
-        $userschart = Charts::database($users, 'bar', 'highcharts')
-			      ->title("Monthly new Register Users")
+        $userschart = Charts::database($users, 'line', 'highcharts')
+			      ->title("Monthly new Registered Users")
 			      ->elementLabel("Total Users")
 			      ->dimensions(600, 500)
 			      ->responsive(true)
                   ->groupByMonth(date('Y'), true);
         
         
-        $billschart = Charts::database($bills, 'pie', 'highcharts')
+        $billschart = Charts::database($bills, 'bar', 'highcharts')
         ->title("Number of Bills Per Month")
         ->elementLabel("Bills")
         ->dimensions(600, 500)
         ->responsive(true)
         ->groupByMonth(date('Y'), true);
-    //     
 
-        return view('manage.dashboard', compact('userschart', 'billschart'),  array('user' => Auth::user()));
+        
+
+        $commentchart = Charts::database($comms, 'bar', 'highcharts')->title("No of contributions each month")
+			      ->elementLabel("Total Number of Contributions")
+			      ->dimensions(600, 500)
+			      ->responsive(true)
+                  ->groupByMonth(date('Y'), true);
+                  
+        $newchart = Charts::database(Models::post()->all(), 'pie', 'highcharts')
+                ->title('Contributions Per Bill')
+                ->elementLabel("Contributions per Bill")
+                  ->dimensions(600, 500)
+                ->labels($labels->toArray())
+                  ->responsive(true)
+                  ->groupBy('chatter_discussion_id', Models::discussion()->bill);
+        
+        
+        // print_r($labels->toArray());
+        return view('manage.dashboard', compact('userschart', 'billschart', 'ncomments', 'nusers', 'commentchart', 'newchart'),  array('user' => Auth::user()));
     }
 }

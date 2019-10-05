@@ -151,25 +151,23 @@
 	            @if(!Auth::guest())
 
 	            	<div id="new_response">
+						<div class="sections m-t-10 m-b-30 " style>
+							<h2>Drag Sections to comment on </h2>
+							<hr>
+							<div class="columns">
+									@foreach($clauses as $clause)
+										
+										<div class="tags column draggable" >
 
-	            		<div class="chatter_avatar">
-		        			@if(Config::get('chatter.user.avatar_image_database_field'))
-
-		        				<?php $db_field = Config::get('chatter.user.avatar_image_database_field'); ?>
-
-		        				<!-- If the user db field contains http:// or https:// we don't need to use the relative path to the image assets -->
-		        				@if( (substr(Auth::user()->{$db_field}, 0, 7) == 'http://') || (substr(Auth::user()->{$db_field}, 0, 8) == 'https://') )
-		        					<img src="{{ Auth::user()->{$db_field}  }}">
-		        				@else
-		        					<img src="{{ Config::get('chatter.user.relative_url_to_image_assets') . Auth::user()->{$db_field}  }}">
-		        				@endif
-
-		        			@else
-		        				<span class="chatter_avatar_circle" style="background-color:<?= \DevDojo\Chatter\Helpers\ChatterHelper::stringToColorCode(Auth::user()->{Config::get('chatter.user.database_field_with_user_name')}) ?>">
-		        					{{ strtoupper(substr(Auth::user()->{Config::get('chatter.user.database_field_with_user_name')}, 0, 1)) }}
-		        				</span>
-		        			@endif
-		        		</div>
+											<p style="background:{{ $discussion->color }}" >{{ $clause->name}}</p>
+										</div>
+							
+									
+								
+							@endforeach
+							</div>
+							<hr>
+						</div>
 
 			            <div id="new_discussion">
 
@@ -177,6 +175,7 @@
 					    	<div class="chatter_loader dark" id="new_discussion_loader">
 							    <div></div>
 							</div>
+						
 
 				            <form id="chatter_form_editor" action="/{{ Config::get('chatter.routes.home') }}/posts" method="POST">
 
@@ -443,6 +442,21 @@
             @endif
         @endif
 	});
+</script>
+<script>
+function allowDrop(ev) {
+  ev.preventDefault();
+}
+
+function drag(ev) {
+  ev.dataTransfer.setData("text", ev.target.id);
+}
+
+function drop(ev) {
+  ev.preventDefault();
+  var data = ev.dataTransfer.getData("text");
+  ev.target.appendChild(document.getElementById(data));
+}
 </script>
 
 <script src="{{ url('/vendor/devdojo/chatter/assets/js/chatter.js') }}"></script>

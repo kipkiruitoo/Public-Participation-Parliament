@@ -2,7 +2,7 @@
 // @import url('https://fonts.googleapis.com/css?family=Nunito');
 
 // Variables
-@import 'variables';
+@import "variables";
 
 // Bootstrap
 // @import '~bootstrap/scss/bootstrap';
@@ -10,11 +10,10 @@
 // import bulma and font-aweome
 @import "node_modules/font-awesome/scss/font-awesome";
 
-@import 'node_modules/bulma/bulma';
+@import "node_modules/bulma/bulma";
 
 // import buefy
-@import 'node_modules/buefy/src/scss/buefy';
-
+@import "node_modules/buefy/src/scss/buefy";
 
 // custom sass
 
@@ -25,3 +24,5 @@
 @import "manage";
 
 @import "styles";
+
+@import "animate";

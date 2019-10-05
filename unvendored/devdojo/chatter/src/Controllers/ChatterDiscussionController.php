@@ -4,6 +4,7 @@ namespace DevDojo\Chatter\Controllers;
 
 use Auth;
 use Carbon\Carbon;
+use App\Clause;
 use DevDojo\Chatter\Events\ChatterAfterNewDiscussion;
 use DevDojo\Chatter\Events\ChatterBeforeNewDiscussion;
 use DevDojo\Chatter\Models\Models;
@@ -207,9 +208,16 @@ class ChatterDiscussionController extends Controller
         if ($category != $discussion_category->slug) {
             return redirect(config('chatter.routes.home').'/'.config('chatter.routes.discussion').'/'.$discussion_category->slug.'/'.$discussion->slug);
         }
+
+        $clauses = Clause::where('bill', $discussion->category->id)->paginate(10);
+
+        // print_r($clauses) ;
+
         $posts = Models::post()->with('user')->where('chatter_discussion_id', '=', $discussion->id)->orderBy(config('chatter.order_by.posts.order'), config('chatter.order_by.posts.by'))->paginate(10);
 
         $chatter_editor = config('chatter.editor');
+
+
 
         if ($chatter_editor == 'simplemde') {
             // Dynamically register markdown service provider
@@ -218,7 +226,7 @@ class ChatterDiscussionController extends Controller
 
         $discussion->increment('views');
         
-        return view('chatter::discussion', compact('discussion', 'posts', 'chatter_editor'));
+        return view('chatter::discussion', compact('discussion', 'posts', 'chatter_editor', 'clauses'));
     }
 
     /**

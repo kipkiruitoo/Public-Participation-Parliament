@@ -88,17 +88,22 @@ class ClauseController extends Controller
      * @param  \App\Clause  $clause
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Clause $clause)
+    public function destroy($id)
     {
       
-        $id = $clause->id;
+        // $id = $clause->id;
+        $clause = Clause::find($id);
 
-        echo $id;
+        $bill = $clause->bill;
 
-        $del = Clause::where('id', $id)->first();
+        // $del = Clause::find($id);
 
-        print_r($del);
+        $clause->delete();
 
+        echo $clause;
+
+    
+        return redirect()->route('bill.edit', $bill);
      
     }
 }

@@ -80,7 +80,7 @@ class BillsController extends Controller
 
         // $bill->save();
         if ($bill->save()) {
-            return redirect()->route('bill.show', $bill->id);
+            
         }
         else {
             $request->session()->flash('danger', 'Sorry a problem occured while creating user. try again later or contact the developer');
@@ -140,7 +140,11 @@ class BillsController extends Controller
         array_shift($magnitudes);
 
         $s = array_filter($sscores);
-        $avscore = array_sum($s)/count($s);
+        if (count($s) > 0) {
+            $avscore = array_sum($s)/count($s);
+        }else {
+            $avscore = 0;
+        }
 
         $scomment = "Loading Comment";
 
@@ -163,7 +167,15 @@ class BillsController extends Controller
         // average score of the magnitude
 
         $m = array_filter($magnitudes);
-        $avmagnitudes = array_sum($m)/ count($m);
+        
+        if (count($m)>0) {
+              $avmagnitudes = array_sum($m)/ count($m);
+        }else{
+
+            $avmagnitudes = 0;
+        }
+
+      
 
         $mcomment ="Emotion of the Text";
 

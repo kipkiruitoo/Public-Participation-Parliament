@@ -96,7 +96,7 @@
                 <!-- end of card content -->
             </div>
         </div>
-        <div class="column is-one-third is-narrow-tablet">
+        <div class="column is-one-third m-l-10">
             <div class="card card-widget">
                 <div class="card-content">
                     <div class="publish-buttons-widget widget-area">
@@ -112,13 +112,12 @@
                     <h2>Sections of the Bill</h2>
                     <div class="list is-hoverable">
                         @foreach ($sections as $section)
-                        <p class="list-item">
-                            {{ $section->name }}
-
+                        <p class="list-item m-b-10 m-l-10 m-r-5 p-l-10">
                             <form action="{{ route('sections.destroy',$section->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="is-small button is-pulled-right is-danger"><i
+                            {{ $section->name }}
+                            <button type="submit" class="is-small button is-pulled-right is-danger m-b-20  m-r-20"><i
                                     class="fa fa-trash "></i></button>
                             </form>
                         </p>
@@ -129,7 +128,7 @@
             </div>
         </div>
     </div>
-    <div class="modal ">
+    <div id="new_discussion" class="modal bounceInUp "> 
         <div class="modal-background"></div>
         <div class="modal-card">
             <form action="{{ route('sections.store') }}" method="POST">
@@ -186,6 +185,7 @@
     modalactivator.addEventListener("click", function() {
         console.log("clicked");
         modal.classList.add("is-active");
+         modal.classList.add("bounceInRight");
     });
     modalcanceller.addEventListener("click", function() {
         modal.classList.remove("is-active");
