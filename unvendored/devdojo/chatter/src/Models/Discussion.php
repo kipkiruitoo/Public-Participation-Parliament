@@ -5,10 +5,23 @@ namespace DevDojo\Chatter\Models;
 use Illuminate\Database\Eloquent\Model;
 use App\Bill;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Searchable\Searchable;
+use Spatie\Searchable\SearchResult;
 
-class Discussion extends Model
+class Discussion extends Model implements Searchable
 {
     use SoftDeletes;
+
+    public function getSearchResult(): SearchResult
+     {
+        $url = url('forums/discussion/' . $this->category->slug. '/' . $this->slug);
+     
+         return new \Spatie\Searchable\SearchResult(
+            $this,
+            $this->title,
+            $url
+         );
+     }
     
     protected $table = 'chatter_discussion';
     public $timestamps = true;
@@ -46,5 +59,7 @@ class Discussion extends Model
     {
         return $this->belongsToMany(config('chatter.user.namespace'), 'chatter_user_discussion', 'discussion_id', 'user_id');
     }
+
+
    
 }

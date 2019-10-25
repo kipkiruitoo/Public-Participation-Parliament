@@ -8,8 +8,10 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laratrust\Traits\LaratrustUserTrait;
 use Illuminate\Support\Facades\Cache;
 use Cmgmyr\Messenger\Traits\Messagable;
+use Spatie\Searchable\Searchable;
+use Spatie\Searchable\SearchResult;
 
-class User extends Authenticatable
+class User extends Authenticatable implements Searchable
 {
     use Notifiable;
     use Messagable;
@@ -46,4 +48,15 @@ class User extends Authenticatable
 
         return Cache::has('user-is-online-'. $this->id);
     }
+
+     public function getSearchResult(): SearchResult
+     {
+        $url = route('users.show', $this->id);
+     
+         return new \Spatie\Searchable\SearchResult(
+            $this,
+            $this->name,
+            $url
+         );
+     }
 }

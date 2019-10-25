@@ -22,7 +22,8 @@
         "laravel/tinker": "^1.0",
         "luketowers/purifier": "~3.0",
         "pusher/pusher-php-server": "^3.4",
-        "santigarcor/laratrust": "4.0.*"
+        "santigarcor/laratrust": "4.0.*",
+        "spatie/laravel-searchable": "^1.4"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.2",

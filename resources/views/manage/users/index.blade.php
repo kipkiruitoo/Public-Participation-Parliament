@@ -11,6 +11,11 @@
         </div>
     </div> 
     <hr>
+    <div class="columns">
+    <div class="column">
+     <user-search></user-search>
+    </div>
+    </div>
     <div class="card">
         <div class="card-content">
                 <table class="table is-narrow table ">
@@ -21,7 +26,9 @@
                                 <th>Id number</th>
                                 <th>Email</th>
                                 <th>phone number</th>
+                                <th>Online Status</th>
                                 <th>Date created</th>
+                                <th>Actions</th>
                                 
                             </tr>
                         </thead>

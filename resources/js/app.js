@@ -4,48 +4,66 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-require('./bootstrap');
+require("./bootstrap");
 
-require('./manage');
+require("./manage");
 
-window.Vue = require('vue');
-window.Slug = require('slug');
-Slug.defaults.mode = 'rfc3986';
+window.Vue = require("vue");
+window.Slug = require("slug");
+Slug.defaults.mode = "rfc3986";
 
-import Buefy from '../../node_modules/buefy/src/index';
+import Buefy from "../../node_modules/buefy/src/index";
+
+import interact from "interactjs";
 
 Vue.use(Buefy);
 
-Vue.component('slugWidget', require('./components/slugWidget.vue').default);
+Vue.component("user-search", require("./components/Search.vue").default);
+Vue.component(
+    "discussion-search",
+    require("./components/DiscussionSearch.vue").default
+);
 
 var app = new Vue({
-    el: '#app',
+    el: "#app",
 
     data: {
         auto_password: true,
-        password_options: 'keep',
+        password_options: "keep",
         permissionsSelected: [],
         rolesSelected: [],
-        resource: '',
-        title: '',
-        slug: '',
+        resource: "",
+        title: "",
+        slug: "",
 
-        crudSelected: ['create', 'read', 'update', 'delete']
+        crudSelected: ["create", "read", "update", "delete"]
     },
     methods: {
         updateSlug: {
-            updateSlug: function (val) {
+            updateSlug: function(val) {
                 this.slug = val;
             }
         },
-        crudName: function (item) {
-            return item.substr(0, 1).toUpperCase() + item.substr(1) + " " + app.resource.substr(0, 1).toUpperCase() + app.resource.substr(1);
+        crudName: function(item) {
+            return (
+                item.substr(0, 1).toUpperCase() +
+                item.substr(1) +
+                " " +
+                app.resource.substr(0, 1).toUpperCase() +
+                app.resource.substr(1)
+            );
         },
-        crudSlug: function (item) {
+        crudSlug: function(item) {
             return item.toLowerCase() + "-" + app.resource.toLowerCase();
         },
-        crudDescription: function (item) {
-            return "Allow a User to " + item.toUpperCase() + " a " + app.resource.substr(0, 1).toUpperCase() + app.resource.substr(1);
+        crudDescription: function(item) {
+            return (
+                "Allow a User to " +
+                item.toUpperCase() +
+                " a " +
+                app.resource.substr(0, 1).toUpperCase() +
+                app.resource.substr(1)
+            );
         }
     }
 });

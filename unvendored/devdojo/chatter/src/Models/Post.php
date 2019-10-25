@@ -8,6 +8,17 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Post extends Model
 {
     use SoftDeletes;
+
+     public function getSearchResult(): SearchResult
+     {
+        $url = url('forums/discussion/' . $this->category->slug. '/' . $this->slug);
+     
+         return new \Spatie\Searchable\SearchResult(
+            $this,
+            $this->title,
+            $url
+         );
+     }
     
     protected $table = 'chatter_post';
     public $timestamps = true;

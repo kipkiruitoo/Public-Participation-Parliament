@@ -1,7 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
-
+  <div class="hero">
+        <div id="chatter_hero_dimmer"></div>
+        <?php $headline_logo = Config::get('chatter.headline_logo'); ?>
+        @if( isset( $headline_logo ) && !empty( $headline_logo ) )
+        <!-- <img src="{{ asset('/images/arms.png') }}"> -->
+        @else
+        <h1>@lang('chatter::intro.headline')</h1>
+        <p>@lang('chatter::intro.description')</p>
+        @endif
+        
+    </div>
 <div class="columns">
     <div class="column is-one-third is-offset-one-third m-t-100">
         <div class="card">

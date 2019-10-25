@@ -54,9 +54,25 @@
 			</div>
 		@endif
 	@endif
-<div class="m-t-20 m-l-20 " >
+	<hr>
+	<div class="columns">
+		<div class="column is-1"></div>
+		<div class="column is-3">
+			<div class=" m-l-10 " >
 <a href="{{route('viewpdf', $discussion->chatter_category_id)}}" class="button has-text-white "  style="background-color:{{ $discussion->color }}">Read Pdf Version of  Bill</a>		
 </div>
+		</div>
+		<div class="column is-7">
+			<div class="field">
+            <input id="squery" type="text" class="input"  placeholder="Search a Post">
+        </div>
+        <div hidden id="rlist" class="list is-hoverable m-t-5" >
+        </div>
+		</div>
+		<div class="column is-1"></div>
+	</div>
+
+  
 
 <hr>
 	<div class="container margin-top">
@@ -460,5 +476,42 @@ function drop(ev) {
 </script>
 
 <script src="{{ url('/vendor/devdojo/chatter/assets/js/chatter.js') }}"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+// const axios = require('axios');
+var squry = document.querySelector("#squery");
+var rlist = document.querySelector("#rlist")
+var results;
+squry.addEventListener("change", function(){
+    console.log(squery.value)
+    if (squery.value != null && squery.value.length > 0 ) {
+        query(squery.value); 
+    }else{
+        rlist.setAttribute("hidden", "true");
+        rlist.setAttribute("style", "position: absolute;");
+    }
+   
+});
+  function  query(q){
 
+    axios
+          .get("/search/post", { params: { query: q } })
+          .then(response => {results = response.data,
+        console.log(results),
+        rlist.removeAttribute("hidden"),
+        rlist.innerHTML = "",
+         results.forEach(element => {
+                  rlist.innerHTML += `<a href=${element.url} class='list-item'>${element.title}</a>`
+              });
+        })
+          .catch(error => { console.log(error)});
+    }
+
+    console.log(results);
+
+   
+   
+
+
+</script>
 @stop

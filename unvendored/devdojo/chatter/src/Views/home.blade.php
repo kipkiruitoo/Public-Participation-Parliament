@@ -19,7 +19,7 @@
 
 @section('content')
 
-<div id="chatter" class="chatter_home">
+<div id="chatter" class="chatter_home"> 
 
     <div id="chatter_hero">
         <div id="chatter_hero_dimmer"></div>
@@ -30,7 +30,20 @@
         <h1>@lang('chatter::intro.headline')</h1>
         <p>@lang('chatter::intro.description')</p>
         @endif
+        
     </div>
+    <div class="columns m-t-15">
+    <div class="column is-half
+is-offset-one-quarter">
+        <div class="field">
+            <input id="squery" type="text" class="input"  placeholder="Search Discussion">
+        </div>
+        <div hidden id="rlist" class="list is-hoverable m-t-5" >
+        </div>
+    </div>
+    </div>
+    
+
 
     @if(config('chatter.errors'))
     @if(Session::has('chatter_alert'))
@@ -80,7 +93,10 @@
             <div class="column is-four-fifths">
                 <div class="panel">
                     <ul class="discussions">
+                        <div id="app"><user-search></user-search></div>
+                        
                         @foreach($discussions as $discussion)
+                        
                         <li>
                             <a class="discussion_list"
                                 href="/{{ Config::get('chatter.routes.home') }}/{{ Config::get('chatter.routes.discussion') }}/{{ $discussion->category->slug }}/{{ $discussion->slug }}">
@@ -256,6 +272,7 @@
     });
 
 </script>
+<script src="{{ asset('js/app.js')}}"></script>
 @elseif($chatter_editor == 'simplemde')
 <script src="{{ url('/vendor/devdojo/chatter/assets/js/simplemde.min.js') }}"></script>
 <script src="{{ url('/vendor/devdojo/chatter/assets/js/chatter_simplemde.js') }}"></script>
@@ -297,6 +314,47 @@
         $('#title').focus();
         @endif
     });
+
+</script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+// const axios = require('axios');
+var squry = document.querySelector("#squery");
+var rlist = document.querySelector("#rlist")
+var results;
+squry.addEventListener("input", function(){
+    console.log(squery.value)
+    if (squery.value != null && squery.value.length > 0 ) {
+        query(squery.value); 
+    }else{
+        rlist.setAttribute("hidden", "true");
+        // rlist.setAttribute("style", "position: absolute;");
+    }
+    if (squry = "") {
+        rlist.setAttribute("hidden", "true");
+    }
+   
+});
+  function  query(q){
+
+    axios
+          .get("/search/discussion", { params: { query: q } })
+          .then(response => {results = response.data,
+        console.log(results),
+        rlist.removeAttribute("hidden"),
+        rlist.innerHTML = "",
+         results.forEach(element => {
+                  rlist.innerHTML += `<a href=${element.url} class='list-item'>${element.title}</a>`
+              });
+        })
+          .catch(error => { console.log(error)});
+    }
+
+    console.log(results);
+
+   
+   
+
 
 </script>
 @stop

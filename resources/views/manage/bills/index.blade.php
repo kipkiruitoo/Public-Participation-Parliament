@@ -39,6 +39,7 @@
                             <a href="{{route('bill.edit', $bill->id)}}" class="button is-success">Edit</a>
                         </td>
                         <td><a href="{{route('bill.show', $bill->id)}}" class="button is-primary">View</a></td>
+                        <td><a href="" class="button is-danger">Delete</a></td>
                     </tr>
 
                     @endforeach
