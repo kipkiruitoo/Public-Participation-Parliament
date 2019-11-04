@@ -110,20 +110,24 @@
                         </div>
                     </div>
                     <h2>Sections of the Bill</h2>
-                    <div class="list is-hoverable">
+                    <table class="table">
                         @foreach ($sections as $section)
-                        <p class="list-item m-b-10 m-l-10 m-r-5 p-l-10">
-                            <form action="{{ route('sections.destroy',$section->id) }}" method="POST">
+                        <tr class=" m-b-10 m-l-10 m-r-5 p-l-10">
+                        <td> {{ $section->name }}</td>
+                           
+                            <td>
+                             <form action="{{ route('sections.destroy',$section->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
-                            {{ $section->name }}
+                            
                             <button type="submit" class="is-small button is-pulled-right is-danger m-b-20  m-r-20"><i
                                     class="fa fa-trash "></i></button>
-                            </form>
-                        </p>
+                            </form></td>
+                            
+                        </tr>
 
                         @endforeach
-                    </div>
+                    </table>
                 </div>
             </div>
         </div>
@@ -138,6 +142,8 @@
                     <button class="delete cancel" aria-label="close"></button>
                 </header>
                 <section class="modal-card-body">
+                <div class="table">
+                </div>
                     <div class="field">
                         <label for="title">Name</label>
                         <p class="control">
@@ -178,17 +184,19 @@
         </div>
     </div>
 </div>
-<script>
-    var modalactivator = document.getElementById("sectionsmodal");
-    var modalcanceller = document.querySelector(".cancel");
-    var modal = document.querySelector(".modal");
-    modalactivator.addEventListener("click", function() {
-        console.log("clicked");
-        modal.classList.add("is-active");
-         modal.classList.add("bounceInRight");
-    });
-    modalcanceller.addEventListener("click", function() {
-        modal.classList.remove("is-active");
-    });
-</script>
+
+  <script>
+var modalactivator = document.querySelector("#sectionsmodal");
+var modalcanceller = document.querySelector(".cancel");
+var modal = document.querySelector(".modal");
+modalactivator.addEventListener("click", function() {
+    console.log("clicked");
+    modal.classList.add("is-active");
+    modal.classList.add("bounceInRight");
+});
+modalcanceller.addEventListener("click", function() {
+    modal.classList.remove("is-active");
+});
+</script> 
 @endsection
+

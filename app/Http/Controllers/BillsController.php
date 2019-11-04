@@ -80,7 +80,7 @@ class BillsController extends Controller
 
         // $bill->save();
         if ($bill->save()) {
-            
+            return redirect()->route('bill.index    ',  array('user' => Auth::user()));
         }
         else {
             $request->session()->flash('danger', 'Sorry a problem occured while creating user. try again later or contact the developer');
@@ -113,6 +113,7 @@ class BillsController extends Controller
         $sscores = array();
 
         $magnitudes = array();
+
         $comments = Models::post()->where('chatter_discussion_id', $discussion->id)->get();
 
 //         $comments = array_map(function($comments){
@@ -271,9 +272,26 @@ class BillsController extends Controller
      * @param  \App\Bill  $bill
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Bill $bill)
+    public function destroy($id)
     {
-        //
+        
+            
+        // $id = $clause->id;
+        $bill = Bill::find($id);
+
+        // $bill = $clause->bill;
+
+        // $del = Clause::find($id);
+
+        if ( $bill->delete()) {
+            $bills = Bill::orderBy('id', 'desc')->paginate(10);
+
+           return view('manage.bills.index',  array('user' => Auth::user()))->withBills($bills);
+        }else{
+            echo "an error occured";
+        }
+       
+
     }
 //* TODO: Fix the pdf upload and the thing FIXME:
 

@@ -98,7 +98,7 @@
                 </div>
                 <div class="col-md-9 right-column">
             @endif
-
+				
 				<div class="conversation">
 	                <ul class="discussions no-bg" style="display:block;">
 	                	@foreach($posts as $post)
@@ -119,6 +119,7 @@
 			                				</p>
 			                			</div>
 			                		@endif
+									
 			                		<div class="chatter_avatar">
 					        			@if(Config::get('chatter.user.avatar_image_database_field'))
 
@@ -158,7 +159,7 @@
 		                	</li>
 	                	@endforeach
 
-
+									
 	                </ul>
 	            </div>
 
@@ -168,22 +169,22 @@
 
 	            	<div id="new_response">
 						<div class="sections m-t-10 m-b-30 " style>
-							<h2>Drag Sections to comment on </h2>
+							<h2>Search Sections to comment on </h2>
 							<hr>
 							<div class="columns">
-									@foreach($clauses as $clause)
-										
-										<div class="tags column draggable" >
-
-											<p style="background:{{ $discussion->color }}" >{{ $clause->name}}</p>
-										</div>
-							
-									
+												<div class="column">
+												<input  list="clauses" class="input" name="clause" placeholder="Type Section to comment on" >
+												<datalist id="clauses">
+												@foreach($clauses as $clause)
+														<option value="{{$clause->name}}">
+												@endforeach
+												</datalist>
+												</div>
 								
-							@endforeach
 							</div>
 							<hr>
 						</div>
+				
 
 			            <div id="new_discussion">
 
@@ -511,6 +512,8 @@ squry.addEventListener("change", function(){
 
    
    
+
+
 
 
 </script>

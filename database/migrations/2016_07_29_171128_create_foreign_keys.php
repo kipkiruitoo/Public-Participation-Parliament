@@ -7,16 +7,16 @@ class CreateForeignKeys extends Migration
 {
     public function up()
     {
-        Schema::table('discussion', function (Blueprint $table) {
-            $table->foreign('category_id')->references('id')->on('bills')
+        Schema::table('chatter_discussion', function (Blueprint $table) {
+            $table->foreign('chatter_category_id')->references('id')->on('chatter_categories')
                         ->onDelete('cascade')
                         ->onUpdate('cascade');
             $table->foreign('user_id')->references('id')->on('users')
                         ->onDelete('cascade')
                         ->onUpdate('cascade');
         });
-        Schema::table('post', function (Blueprint $table) {
-            $table->foreign('discussion_id')->references('id')->on('discussion')
+        Schema::table('chatter_post', function (Blueprint $table) {
+            $table->foreign('chatter_discussion_id')->references('id')->on('chatter_discussion')
                         ->onDelete('cascade')
                         ->onUpdate('cascade');
             $table->foreign('user_id')->references('id')->on('users')

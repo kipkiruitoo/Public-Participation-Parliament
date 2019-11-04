@@ -39,7 +39,13 @@
                             <a href="{{route('bill.edit', $bill->id)}}" class="button is-success">Edit</a>
                         </td>
                         <td><a href="{{route('bill.show', $bill->id)}}" class="button is-primary">View</a></td>
-                        <td><a href="" class="button is-danger">Delete</a></td>
+                        <td>
+                        <form action="{{ route('bill.destroy',$bill->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')<button type="submit" class="button is-danger">Delete</a>
+                            </form>
+                            </td>
+                            
                     </tr>
 
                     @endforeach

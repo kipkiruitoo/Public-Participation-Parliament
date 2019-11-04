@@ -13,7 +13,10 @@
     <hr>
     <div class="columns">
     <div class="column">
-     <user-search></user-search>
+    <div id="app">
+    <user-search></user-search>
+    </div>
+     
     </div>
     </div>
     <div class="card">

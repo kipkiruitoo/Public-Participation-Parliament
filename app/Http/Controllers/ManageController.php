@@ -27,36 +27,36 @@ class ManageController extends Controller
         $comms = Models::post()->where(DB::raw("(DATE_FORMAT(created_at,'%Y'))"), date('Y'))->get();
         $nusers = User::count();
         // $petitions = Petitions::where(DB::raw("(DATE_FORMAT(created_at,'%Y'))"),date('Y'))->get();
-        $userschart = Charts::database($users, 'line', 'highcharts')
+        $userschart = Charts::database($users, 'bar', 'fusioncharts')
 			      ->title("Monthly new Registered Users")
 			      ->elementLabel("Total Users")
 			      ->dimensions(600, 500)
-			      ->responsive(true)
+			      
                   ->groupByMonth(date('Y'), true);
         
         
-        $billschart = Charts::database($bills, 'bar', 'highcharts')
+        $billschart = Charts::database($bills, 'bar', 'fusioncharts')
         ->title("Number of Bills Per Month")
         ->elementLabel("Bills")
         ->dimensions(600, 500)
-        ->responsive(true)
+       
         ->groupByMonth(date('Y'), true);
 
         
 
-        $commentchart = Charts::database($comms, 'bar', 'highcharts')->title("No of contributions each month")
+        $commentchart = Charts::database($comms, 'bar', 'fusioncharts')->title("No of contributions each month")
 			      ->elementLabel("Total Number of Contributions")
 			      ->dimensions(600, 500)
-			      ->responsive(true)
+			     
                   ->groupByMonth(date('Y'), true);
                   
-        $newchart = Charts::database(Models::post()->all(), 'pie', 'highcharts')
+        $newchart = Charts::database(Models::post()->all(), 'pie', 'fusioncharts')
                 ->title('Contributions Per Bill')
                 ->elementLabel("Contributions per Bill")
                   ->dimensions(600, 500)
                 ->labels($labels->toArray())
-                  ->responsive(true)
-                  ->groupBy('chatter_discussion_id', Models::discussion()->bill);
+             
+                  ->groupBy('chatter_discussion_id',  Models::discussion()->bill, $labels->toArray());
         
         
         // print_r($labels->toArray());
