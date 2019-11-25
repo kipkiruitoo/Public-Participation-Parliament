@@ -15,7 +15,7 @@ return [
         'all'          => 'All '.trans('chatter::intro.titles.discussion'),
         'create'       => 'Create '.trans('chatter::intro.titles.discussion'),
         'posted_by'    => 'Posted by',
-        'head_details' => 'Posted in Category',
+        'head_details' => 'Posted in Bill',
 
     ],
     'response' => [
@@ -28,7 +28,7 @@ return [
 
     'editor' => [
         'title'               => 'Title of '.trans('chatter::intro.titles.discussion'),
-        'select'              => 'Select a Category',
+        'select'              => 'Select a Bill for the Discussion',
         'tinymce_placeholder' => 'Type Your '.trans('chatter::intro.titles.discussion').' Here...',
         'select_color_text'   => 'Select a Color for this '.trans('chatter::intro.titles.discussion').' (optional)',
     ],

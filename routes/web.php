@@ -7,7 +7,7 @@ Route::get('/', 'HomeController@discuss');
 Route::get('/participate', 'HomeController@participate');
 Route::get('/discuss', 'HomeController@discuss');
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 Route::prefix('manage')->middleware('role:superadministrator|administrator')->group(function () {
     Route::get('/', 'ManageController@index');

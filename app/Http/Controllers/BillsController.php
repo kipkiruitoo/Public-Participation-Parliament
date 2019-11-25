@@ -114,7 +114,14 @@ class BillsController extends Controller
 
         $magnitudes = array();
 
-        $comments = Models::post()->where('chatter_discussion_id', $discussion->id)->get();
+        if (Models::post()->where('chatter_discussion_id', $discussion->id)->get()) {
+            # code...
+            $comments = Models::post()->where('chatter_discussion_id', $discussion->id)->get();
+        }
+        else {
+            $comments = ['comment', 'not', 'found'];
+        }
+        
 
 //         $comments = array_map(function($comments){
 // //     return (array) $object;

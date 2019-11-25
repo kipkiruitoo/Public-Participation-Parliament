@@ -15,7 +15,11 @@
                 <h1 class="title">Reset Your Password</h1>
                 <form action="{{route('register')}}" method="post" role="form">
                 @csrf
-                <input type="token" name="token" value="{{ $token }}">
+                <div class="field">
+                <label for="tok">Password Reset Token</label>
+                <textarea id="tok" class="textarea" type="token" name="token" value="">{{ $token }}</textarea>
+                </div>
+                
                 <div class="field">
                     <label for="" class="label">Email</label>
                     <p class="control">
